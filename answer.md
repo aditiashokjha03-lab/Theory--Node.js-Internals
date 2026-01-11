@@ -41,6 +41,7 @@ Manages async execution
   - Continuously checks for pending callbacks, timers, and I/O events.
   - Ensures non-blocking execution by deferring heavy tasks to libuv.
 
+<img src="https://d14lhgoyljo1xt.cloudfront.net/assets/b2c610ff35_img-nodejs-architecture0.webp">
 
 ### 2. libuv
 * What is libuv?
@@ -58,6 +59,7 @@ JavaScript alone cannot handle low-level OS operations like networking or file I
   - Asynchronous I/O (network, file system).
   - Timers and signals.
 
+<img src="https://miro.medium.com/1%2Axm_WajiPlaOeJWcqgJb1xQ.png">
 
 ### 3. Thread Pool
 * What is a thread pool?
@@ -109,6 +111,8 @@ For CPU-intensive tasks (e.g., image processing, large computations) that would 
 ## Answer.
 Node.js uses two main types of task queues to manage asynchronous execution:
 
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20200224050909/nodejs2.png">
+
 1. **Macro Task Queue**
 It contains tasks scheduled by timers, I/O, and other system-level operations.
 * Examples:
@@ -130,9 +134,11 @@ It contains tasks that are scheduled to run immediately after the current operat
 - After executing a macro task, the event loop empties the entire microtask queue before moving to the next macro task.
 - This ensures that promise resolutions and critical updates happen as soon as possible.
 
+<img src="https://blog.softbinator.com/wp-content/uploads/14_Microtask-vs.-Macrotask-in-JavaScript-What-are-The-Differences.png">
+
 **Examples of tasks in each queue includes:**
-  - Macro tasks: `setTimeout(() => console.log("timeout"))
-  - Micro tasks: Promise.resolve().then(() => console.log("promise"))
+  - Macro tasks: `setTimeout(() => console.log("timeout"))`
+  - Micro tasks: `Promise.resolve().then(() => console.log("promise"))`
 
 **Execution Order Example:**
 ```
@@ -143,7 +149,9 @@ console.log("End");
 ```
 
 **Output would be**
+```
 Start
 End
 Promise
 Timeout
+```
